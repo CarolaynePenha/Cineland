@@ -5,9 +5,7 @@ export default function Footer({ title, posterURL, weekday, time }) {
       <img src={posterURL} alt={title} />
       <div>
         <p>{title}t</p>
-        <p>
-          {weekday} - {time}h.
-        </p>
+        <p>{!time ? "" : `${weekday} - ${time}h`}</p>
       </div>
     </DivFooter>
   );

@@ -12,17 +12,21 @@ export default function Inputs({ seatsId, seatsName, title, date, time }) {
     event.preventDefault();
     const obj = {
       ids: seatsId,
-      name: { name },
-      cpf: { cpf },
-      seatsName: { seatsName },
-      title: { title },
-      date: { date },
-      time: { time },
+      name,
+      cpf,
+      seatsName,
+      title,
+      date,
+      time,
     };
     navigate(`/receipt`, { state: { obj } });
     const promise = axios.post(
       `https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many`,
-      obj
+      {
+        ids: seatsId,
+        name,
+        cpf,
+      }
     );
 
     promise.then((response) => {
@@ -30,11 +34,19 @@ export default function Inputs({ seatsId, seatsName, title, date, time }) {
     });
     promise.catch((error) => console.log(error.response));
   }
+  function cpfMask(cpf) {
+    return cpf
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
+  }
   return (
     <Form onSubmit={post}>
       <input
         type="text"
-        maxlength="50"
+        maxLength="50"
         minLength="5"
         required
         placeholder="Digite seu nome"
@@ -42,12 +54,11 @@ export default function Inputs({ seatsId, seatsName, title, date, time }) {
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        type="number"
-        size="11"
+        type="text"
         required
         placeholder="Digite seu cpf"
         value={cpf}
-        onChange={(e) => setCpf(e.target.value)}
+        onChange={(e) => setCpf(cpfMask(e.target.value))}
       />
       <button type="submit" className="save-button">
         Reservar assento(s)

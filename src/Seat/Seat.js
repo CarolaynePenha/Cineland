@@ -8,16 +8,26 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import loading from "./../img/Spinner-1s-200px.gif";
+import { Load } from "../Movies/Movies";
 
 export default function Seat() {
   const { sessionID } = useParams();
   const [session, setSession] = useState(null);
-  const [seatsId, setSeatId] = useState([]);
-  const [seatsName, setSeatName] = useState([]);
+  const [seatsInfo, setSeatsInfo] = useState([]);
 
   function ids(seat) {
-    setSeatId([...seatsId, seat.id]);
-    setSeatName([...seatsName, seat.name]);
+    if (seatsInfo.length === 0) {
+      setSeatsInfo([...seatsInfo, seat]);
+    } else {
+      const seatsFilter = seatsInfo.filter(({ id }) => {
+        return id !== seat.id;
+      });
+      if (seatsFilter.length !== seatsInfo.length) {
+        setSeatsInfo([...seatsFilter]);
+      } else {
+        setSeatsInfo([...seatsInfo, seat]);
+      }
+    }
   }
   useEffect(() => {
     const promise = axios.get(
@@ -60,8 +70,8 @@ export default function Seat() {
           <p>Disponível</p>
         </Legend>
         <Inputs
-          seatsId={seatsId}
-          seatsName={seatsName}
+          seatsId={seatsInfo.map((seat) => seat.id)}
+          seatsName={seatsInfo.map((seat) => seat.name)}
           title={title}
           date={date}
           time={time}
@@ -128,15 +138,5 @@ const Legend = styled.div`
     height: 20px;
     border-radius: 50%;
     margin: 0px 5px;
-  }
-`;
-
-const Load = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  img {
-    width: 250px;
   }
 `;

@@ -38,6 +38,7 @@ export default function Button({ seat, ids }) {
       ids(seat);
     } else {
       setAvailable({ ...available, selected: "available" });
+      ids(seat);
     }
   }
 }

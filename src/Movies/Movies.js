@@ -34,7 +34,7 @@ export default function Movies() {
           {movies.map((movie) => {
             const { posterURL, id } = movie;
             return (
-              <div className="movie">
+              <div key={id} className="movie">
                 <Link to={`/time/${id}`}>
                   <img src={posterURL} />
                 </Link>
@@ -80,7 +80,7 @@ const Section = styled.section`
   }
 `;
 
-const Load = styled.div`
+export const Load = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;

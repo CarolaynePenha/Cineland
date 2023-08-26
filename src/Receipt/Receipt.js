@@ -9,12 +9,7 @@ export default function Receipt() {
   const { obj } = location.state;
   const navigate = useNavigate();
 
-  const { name } = obj.name;
-  const { seatsName } = obj.seatsName;
-  const { cpf } = obj.cpf;
-  const { time } = obj.time;
-  const { title } = obj.title;
-  const { date } = obj.date;
+  const { name, seatsName, cpf, time, title, date } = obj;
 
   return (
     <Section>

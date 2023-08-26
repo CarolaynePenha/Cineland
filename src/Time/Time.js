@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Footer from "../Footer/Footer";
 
 import loading from "./../img/Spinner-1s-200px.gif";
+import { Load } from "../Movies/Movies";
 
 export default function Time() {
   const { movieID } = useParams();
@@ -94,15 +95,5 @@ const Container = styled.div`
   .date p {
     font-size: 20px;
     text-align: start;
-  }
-`;
-
-const Load = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  img {
-    width: 250px;
   }
 `;
