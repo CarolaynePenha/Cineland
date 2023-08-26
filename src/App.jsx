@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Movies from "./Movies/Movies";
 import Header from "./Header/Header";
 import Time from "./Time/Time";
-import Seat from "./Seat";
-import Receipt from "./Receipt";
+import Seat from "./Seat/Seat";
+import Receipt from "./Receipt/Receipt";
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
           <Route path="/" element={<Movies />} />
           <Route path="/time/:movieID" element={<Time />} />
           <Route path="/seat/:sessionID" element={<Seat />} />
-          <Route path="receipt" element={<Receipt />} />
+          <Route path="/receipt" element={<Receipt />} />
         </Routes>
       </BrowserRouter>
     </DivApp>

@@ -41,7 +41,7 @@ export default function Time() {
             </div>
             {showtimes.map((time) => (
               <Link to={`/seat/${time.id}`}>
-                <button>
+                <button key={time.id}>
                   <p>{time.name}</p>
                 </button>
               </Link>

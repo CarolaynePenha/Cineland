@@ -26,7 +26,6 @@ export default function Movies() {
         </Div>
         <Section>
           {movies.map((movie) => {
-            console.log("movie", movie);
             const { posterURL, id } = movie;
             return (
               <div className="movie">
