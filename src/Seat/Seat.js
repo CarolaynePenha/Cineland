@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import loading from "./../img/Spinner-1s-200px.gif";
+
 export default function Seat() {
   const { sessionID } = useParams();
   const [session, setSession] = useState(null);
@@ -29,7 +31,11 @@ export default function Seat() {
   }, []);
 
   if (session === null) {
-    return <p>Carregando</p>;
+    return (
+      <Load>
+        <img src={loading} />
+      </Load>
+    );
   }
 
   const { movie, name: time, day, seats } = session;
@@ -122,5 +128,15 @@ const Legend = styled.div`
     height: 20px;
     border-radius: 50%;
     margin: 0px 5px;
+  }
+`;
+
+const Load = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 250px;
   }
 `;

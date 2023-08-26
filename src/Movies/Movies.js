@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import loading from "./../img/Spinner-1s-200px.gif";
+
 export default function Movies() {
   const [movies, setMovies] = useState(null);
 
@@ -17,7 +19,11 @@ export default function Movies() {
     promise.catch((error) => console.log("error", error.response));
   }, []);
   if (movies === null) {
-    return <p>Carregando</p>;
+    return (
+      <Load>
+        <img src={loading} />
+      </Load>
+    );
   } else {
     return (
       <>
@@ -71,5 +77,17 @@ const Section = styled.section`
     justify-content: center;
     align-items: center;
     margin: 15px;
+  }
+`;
+
+const Load = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 200px;
+    height: 200px;
   }
 `;
